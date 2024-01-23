@@ -22,7 +22,8 @@ export const WebSocketProvider = ({ children }: { children: ReactNode }) => {
 
 
 	useEffect(() => {
-		const ws = new WebSocket("ws://localhost:8080");
+		const url = process.env.NODE_ENV == "development" ? "ws://localhost:8080" : "";
+		const ws = new WebSocket(url);
 		setWebSocket(ws);
 		ws.onopen = () => {
 			console.log("Connected to WebSocket server");
@@ -30,7 +31,7 @@ export const WebSocketProvider = ({ children }: { children: ReactNode }) => {
 		ws.onmessage = (event) => {
 			console.log(event);
 			const data = JSON.parse(event.data);
-			setCurrentData({type: data.type, time: new Date(data.time)})
+			setCurrentData({ type: data.type, time: new Date(data.time) })
 			// Handle incoming messages
 		};
 		ws.onclose = () => {
