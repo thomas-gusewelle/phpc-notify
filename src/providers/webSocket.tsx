@@ -22,7 +22,7 @@ export const WebSocketProvider = ({ children }: { children: ReactNode }) => {
 
 
 	useEffect(() => {
-		const url = process.env.NODE_ENV == "development" ? "ws://localhost:8080" : "";
+		const url = process.env.NODE_ENV == "development" ? "ws://localhost:8080" : "ws://phpc-notify-backend-production.up.railway.app";
 		const ws = new WebSocket(url);
 		setWebSocket(ws);
 		ws.onopen = () => {
