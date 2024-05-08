@@ -40,6 +40,7 @@ export const WebSocketProvider = ({ children }: { children: ReactNode }) => {
       };
       ws.onclose = () => {
         // ws.close();
+        window.location.reload();
         setWebSocket(null);
         setTimeout(() => {
           connectToWS();
@@ -54,6 +55,8 @@ export const WebSocketProvider = ({ children }: { children: ReactNode }) => {
       webSocket?.close();
     };
   }, []);
+
+
 
   return (
     <webSocketContext.Provider
